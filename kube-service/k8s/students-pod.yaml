@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: students-service
+spec:
+  selector:
+    matchLabels:
+      name: students-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: students-service
+    spec:
+      containers:
+      - name: school
+        image: vmacherla/students-service:1
+        ports:
+        - containerPort: 1001
+          name: http
+          protocol: TCP
+        imagePullPolicy: Always
+        env:
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: demo
+              key: password
+      restartPolicy: Always

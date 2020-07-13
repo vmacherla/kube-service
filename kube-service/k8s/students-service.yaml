@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: Service
+metadata:
+    name: students-service
+    labels:
+        name: students-service
+        app: school
+spec:
+    type: NodePort
+    selector:
+      name: students-service
+    ports:
+    - port: 80
+      targetPort: 1001
+      protocol: TCP
